@@ -4,7 +4,12 @@ import scrapy
 class FightsnamesSpider(scrapy.Spider):
     name = "fightsnames"
     allowed_domains = ["www.fightmatrix.com"]
-    start_urls = ["https://www.fightmatrix.com/upcoming-events/UFC-Fight-Night:-Rosas-Jr.-vs.-Barcelos/113789/"]
+    start_urls = []
+
+    def __init__(self, url=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if url:
+            self.start_urls = [url]
 
     def parse(self, response):
         # Extraer y limpiar nombres de peleadores

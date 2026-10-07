@@ -3,11 +3,14 @@ from fightmatrix.items import FightmatrixItem
 
 class FightmatrixspiderSpider(scrapy.Spider):
     name = "fightmatrixspider"
-    # Añadimos sherdog.com a los dominios permitidos
     allowed_domains = ["www.fightmatrix.com", "fightmatrix.com", "www.sherdog.com", "sherdog.com"]
-    start_urls = ["https://www.fightmatrix.com/upcoming-events/UFC-Fight-Night:-Rosas-Jr.-vs.-Barcelos/113789/"]
+    start_urls = []
 
-    # Definimos los headers aquí para reutilizarlos en las peticiones a Sherdog
+    def __init__(self, url=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if url:
+            self.start_urls = [url]
+
     sherdog_headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
     }
